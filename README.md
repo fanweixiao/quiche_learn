@@ -1,9 +1,17 @@
-![quiche](quiche.svg)
+Learn quiche with debug footprints
+----------------------------------
 
-[![crates.io](https://img.shields.io/crates/v/quiche.svg)](https://crates.io/crates/quiche)
-[![docs.rs](https://docs.rs/quiche/badge.svg)](https://docs.rs/quiche)
-[![license](https://img.shields.io/github/license/cloudflare/quiche.svg)](https://opensource.org/licenses/BSD-2-Clause)
-[![build](https://travis-ci.com/cloudflare/quiche.svg?branch=master)](https://travis-ci.com/cloudflare/quiche)
+### Server
+
+```bash
+ $ cargo run --example srv
+```
+
+### Client
+
+```bash
+ $ cargo run --example clt
+```
 
 [quiche] is an implementation of the QUIC transport protocol and HTTP/3 as
 specified by the [IETF]. It provides a low level API for processing QUIC packets
