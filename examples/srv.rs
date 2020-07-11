@@ -42,7 +42,8 @@ fn main() {
     let mut events = mio::Events::with_capacity(1024);
 
     // Create the UDP listening socket, and register it with the event loop.
-    let socket = net::UdpSocket::bind("127.0.0.1:4433").unwrap();
+    let socket = net::UdpSocket::bind("127.0.0.1:4241").unwrap();
+    //let socket = net::UdpSocket::bind("127.0.0.1:4433").unwrap();
 
     let socket = mio::net::UdpSocket::from_socket(socket).unwrap();
     poll.register(
@@ -63,9 +64,7 @@ fn main() {
         .load_priv_key_from_pem_file("examples/cert.key")
         .unwrap();
 
-    config
-        .set_application_protos(b"\x05hq-29\x05hq-28\x05hq-27\x08http/0.9")
-        .unwrap();
+    config.set_application_protos(b"\x05hq-29").unwrap();
 
     config.set_max_idle_timeout(5000);
     config.set_max_udp_payload_size(MAX_DATAGRAM_SIZE as u64);
@@ -530,6 +529,14 @@ fn handle_stream(client: &mut Client, stream_id: u64, buf: &[u8]) {
             return;
         }
     };
+
+    println!(
+        "16**2/ written={}, body.len()={}, body={:?}",
+        written,
+        body.len(),
+        hex_dump(&body)
+    );
+    println!("{}", "16**3/ RESP DONE".red());
 
     if written < body.len() {
         let response = PartialResponse { body, written };

@@ -13,7 +13,9 @@ fn main() {
     let mut events = mio::Events::with_capacity(1024);
 
     let bind_addr = "0.0.0.0:0";
-    let peer_addr = "127.0.0.1:4433";
+    // let peer_addr = "127.0.0.1:4433";
+    //let peer_addr = "127.0.0.1:4241";
+    let peer_addr = "quic.rocks:4433";
 
     println!("2/ bind_addr={}, peer_addr={}", bind_addr, peer_addr);
 
@@ -39,7 +41,7 @@ fn main() {
     config.verify_peer(false);
 
     config
-        .set_application_protos(b"\x05hq-29\x05hq-28\x05hq-27\x08http/0.9")
+        .set_application_protos(b"\x05hq-29")
         .unwrap();
 
     config.set_max_idle_timeout(5000);
@@ -167,7 +169,8 @@ fn main() {
             // Send REQ
             println!("{}", "17/ SEND 1st REQ".red());
 
-            let req = format!("REQ:PING");
+            // let req = format!("REQ:PING");
+            let req = format!("name:CELLA\n");
             println!(
                 "18/ CONN_SEND={}, HTTP_REQ_STREAM_ID={}",
                 req.green(),
